@@ -21,7 +21,7 @@ export default function RouterApp() {
                 <Routes>
                     <Route path="/" element={<Form />} />
                     <Route path="/table" element={<Table />} />
-                </Routes>
+                </Routes>   
             </div>
         </Router>
     );

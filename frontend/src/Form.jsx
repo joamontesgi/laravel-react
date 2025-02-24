@@ -3,23 +3,23 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { useState } from 'react'
 
 function Form() {
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState(0)
-  const [description, setDescription] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const guardar = () => {
-    const newProduct = {
-      title: title,
-      price: price,
-      description: description
+    const newUser = {
+      nombre: name,
+      correo: email,
+      contrasenia: password
     }
 
-    fetch('https://fakestoreapi.com/products', {
+    fetch('http://localhost:8000/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newProduct)
+      body: JSON.stringify(newUser)
     })
       .then(res => res.json())
       .then(data => console.log(data))
@@ -28,35 +28,32 @@ function Form() {
 
   return (
     <div className='container'>
-      <label htmlFor="title">Ingrese el título:</label>
+      <label htmlFor="name">Ingrese el nombre:</label>
       <input
         type="text"
-        id="title"
+        id="name"
         className='form-control'
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
 
-      <label htmlFor="price">Ingrese el precio:</label>
+      <label htmlFor="email">Ingrese el correo:</label>
       <input
-        type="number"
-        id='price'
+        type="email"
+        id='email'
         className='form-control'
-        value={price}
-        min={0}
-        onChange={(e) => setPrice(e.target.value)}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
-      <label htmlFor="description">Ingrese la descripción:</label>
-      <textarea
-        id="description"
-        cols="30"
-        rows="10"
+      <label htmlFor="password">Ingrese la contraseña:</label>
+      <input
         className='form-control'
-        placeholder='Ingrese la descripción del producto'
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      ></textarea>
+        placeholder='Ingrese la contraseña del producto'
+        type='password'
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
 
       <button className='btn btn-primary mt-3' onClick={guardar}>
         Guardar
